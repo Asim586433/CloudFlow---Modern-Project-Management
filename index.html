@@ -15,6 +15,7 @@
             --dark-gray: #333333;
             --text-gray: #666666;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --overlay: rgba(0, 0, 0, 0.7);
         }
         
         * {
@@ -569,6 +570,110 @@
             color: rgba(255, 255, 255, 0.7);
         }
         
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--overlay);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 10px;
+            width: 100%;
+            max-width: 450px;
+            padding: 30px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            color: var(--navy-blue);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-gray);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .forgot-password {
+            color: var(--cyan);
+            text-decoration: none;
+        }
+        
+        .modal-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        
+        .modal-footer a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        /* Page Sections */
+        .page-section {
+            display: none;
+            padding: 100px 0;
+        }
+        
+        .page-section.active {
+            display: block;
+        }
+        
         /* Responsive Design */
         @media (max-width: 992px) {
             .features-grid, .pricing-grid {
@@ -615,6 +720,10 @@
                 overflow-x: auto;
                 white-space: nowrap;
             }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -622,403 +731,645 @@
     <!-- Header & Navigation -->
     <header>
         <div class="container header-container">
-            <a href="#" class="logo">
+            <a href="#" class="logo" id="home-link">
                 <i class="fas fa-project-diagram"></i>
                 <span>CloudFlow</span>
             </a>
             
             <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#dashboard">Dashboard</a></li>
-                <li><a href="#testimonials">Testimonials</a></li>
-                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#" id="features-link">Features</a></li>
+                <li><a href="#" id="pricing-link">Pricing</a></li>
+                <li><a href="#" id="integrations-link">Integrations</a></li>
+                <li><a href="#" id="updates-link">Updates</a></li>
             </ul>
             
             <div class="nav-buttons">
-                <a href="#" class="btn btn-outline">Log In</a>
-                <a href="#" class="btn btn-primary">Sign Up Free</a>
+                <a href="#" class="btn btn-outline" id="login-btn">Log In</a>
+                <a href="#" class="btn btn-primary" id="signup-btn">Sign Up Free</a>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container hero-container">
-            <div class="hero-content">
-                <h1 class="hero-heading">Simplify Your Workflow, Amplify Your Results</h1>
-                <p class="hero-subheading">CloudFlow is the all-in-one project management platform designed to help teams collaborate, automate workflows, and deliver projects faster.</p>
-                <div class="cta-buttons">
-                    <a href="#" class="btn btn-primary">Start Your Free Trial</a>
-                    <a href="#" class="btn btn-outline">Watch Demo</a>
+    <!-- Main Content -->
+    <main>
+        <!-- Home Page -->
+        <section id="home-page" class="page-section active">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="container hero-container">
+                    <div class="hero-content">
+                        <h1 class="hero-heading">Simplify Your Workflow, Amplify Your Results</h1>
+                        <p class="hero-subheading">CloudFlow is the all-in-one project management platform designed to help teams collaborate, automate workflows, and deliver projects faster.</p>
+                        <div class="cta-buttons">
+                            <a href="#" class="btn btn-primary" id="hero-signup">Start Your Free Trial</a>
+                            <a href="#" class="btn btn-outline">Watch Demo</a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <div class="hero-image-content">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Interactive Dashboard Preview</h3>
+                            <p>Real-time analytics and project tracking</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="hero-image">
-                <div class="hero-image-content">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Interactive Dashboard Preview</h3>
-                    <p>Real-time analytics and project tracking</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="container">
-            <h2 class="section-heading">Powerful Features</h2>
-            <p class="section-subheading">Designed to help your team work smarter, not harder. Everything you need in one platform.</p>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-pie"></i>
-                    </div>
-                    <h3 class="feature-title">Advanced Analytics</h3>
-                    <p class="feature-desc">Gain valuable insights with real-time data visualization and custom reports.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 class="feature-title">Team Collaboration</h3>
-                    <p class="feature-desc">Work together seamlessly with shared tasks, comments, and file sharing.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-tasks"></i>
-                    </div>
-                    <h3 class="feature-title">Automated Workflows</h3>
-                    <p class="feature-desc">Automate repetitive tasks and create custom workflows without coding.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3 class="feature-title">Enterprise Security</h3>
-                    <p class="feature-desc">Bank-level security keeps your data safe with encryption and regular backups.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-plug"></i>
-                    </div>
-                    <h3 class="feature-title">Third-Party Integrations</h3>
-                    <p class="feature-desc">Connect with your favorite tools like Slack, Google Drive, and Microsoft Teams.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3 class="feature-title">Mobile Accessibility</h3>
-                    <p class="feature-desc">Manage projects on the go with our iOS and Android mobile apps.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Dashboard Preview -->
-    <section class="dashboard" id="dashboard">
-        <div class="container">
-            <h2 class="dashboard-heading">Interactive Dashboard</h2>
-            <p class="dashboard-subheading">See how CloudFlow helps you track projects, team performance, and business metrics in real-time.</p>
-            
-            <div class="dashboard-preview">
-                <div class="dashboard-tabs">
-                    <div class="dashboard-tab active" data-tab="overview">Overview</div>
-                    <div class="dashboard-tab" data-tab="projects">Projects</div>
-                    <div class="dashboard-tab" data-tab="team">Team Performance</div>
-                    <div class="dashboard-tab" data-tab="analytics">Advanced Analytics</div>
-                </div>
-                
-                <div class="dashboard-content">
-                    <div class="tab-content active" id="overview">
-                        <h3>Project Overview</h3>
-                        <p>Track all your projects in one place with our comprehensive dashboard.</p>
+            <!-- Features Section -->
+            <section class="features" id="features">
+                <div class="container">
+                    <h2 class="section-heading">Powerful Features</h2>
+                    <p class="section-subheading">Designed to help your team work smarter, not harder. Everything you need in one platform.</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <h3 class="feature-title">Advanced Analytics</h3>
+                            <p class="feature-desc">Gain valuable insights with real-time data visualization and custom reports.</p>
+                        </div>
                         
-                        <div class="data-grid">
-                            <div class="data-card">
-                                <h3>Project Status</h3>
-                                <div class="stats">
-                                    <div class="stat">
-                                        <div class="stat-value">12</div>
-                                        <div class="stat-label">Active</div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="feature-title">Team Collaboration</h3>
+                            <p class="feature-desc">Work together seamlessly with shared tasks, comments, and file sharing.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <h3 class="feature-title">Automated Workflows</h3>
+                            <p class="feature-desc">Automate repetitive tasks and create custom workflows without coding.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3 class="feature-title">Enterprise Security</h3>
+                            <p class="feature-desc">Bank-level security keeps your data safe with encryption and regular backups.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <h3 class="feature-title">Third-Party Integrations</h3>
+                            <p class="feature-desc">Connect with your favorite tools like Slack, Google Drive, and Microsoft Teams.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3 class="feature-title">Mobile Accessibility</h3>
+                            <p class="feature-desc">Manage projects on the go with our iOS and Android mobile apps.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Preview -->
+            <section class="dashboard" id="dashboard">
+                <div class="container">
+                    <h2 class="dashboard-heading">Interactive Dashboard</h2>
+                    <p class="dashboard-subheading">See how CloudFlow helps you track projects, team performance, and business metrics in real-time.</p>
+                    
+                    <div class="dashboard-preview">
+                        <div class="dashboard-tabs">
+                            <div class="dashboard-tab active" data-tab="overview">Overview</div>
+                            <div class="dashboard-tab" data-tab="projects">Projects</div>
+                            <div class="dashboard-tab" data-tab="team">Team Performance</div>
+                            <div class="dashboard-tab" data-tab="analytics">Advanced Analytics</div>
+                        </div>
+                        
+                        <div class="dashboard-content">
+                            <div class="tab-content active" id="overview">
+                                <h3>Project Overview</h3>
+                                <p>Track all your projects in one place with our comprehensive dashboard.</p>
+                                
+                                <div class="data-grid">
+                                    <div class="data-card">
+                                        <h3>Project Status</h3>
+                                        <div class="stats">
+                                            <div class="stat">
+                                                <div class="stat-value">12</div>
+                                                <div class="stat-label">Active</div>
+                                            </div>
+                                            <div class="stat">
+                                                <div class="stat-value">7</div>
+                                                <div class="stat-label">Completed</div>
+                                            </div>
+                                            <div class="stat">
+                                                <div class="stat-value">3</div>
+                                                <div class="stat-label">Behind</div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="stat">
-                                        <div class="stat-value">7</div>
-                                        <div class="stat-label">Completed</div>
-                                    </div>
-                                    <div class="stat">
-                                        <div class="stat-value">3</div>
-                                        <div class="stat-label">Behind</div>
+                                    
+                                    <div class="data-card">
+                                        <h3>Team Performance</h3>
+                                        <div class="stats">
+                                            <div class="stat">
+                                                <div class="stat-value">94%</div>
+                                                <div class="stat-label">Tasks Done</div>
+                                            </div>
+                                            <div class="stat">
+                                                <div class="stat-value">87%</div>
+                                                <div class="stat-label">On Time</div>
+                                            </div>
+                                            <div class="stat">
+                                                <div class="stat-value">4.8/5</div>
+                                                <div class="stat-label">Satisfaction</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                
+                                <a href="#" class="btn btn-primary">View Detailed Reports</a>
                             </div>
                             
-                            <div class="data-card">
+                            <div class="tab-content" id="projects">
+                                <h3>Project Management</h3>
+                                <p>Manage all your projects, assign tasks, and track progress.</p>
+                                
+                                <div class="data-grid">
+                                    <div class="data-card">
+                                        <h3>Recent Projects</h3>
+                                        <ul>
+                                            <li>Website Redesign - 80% complete</li>
+                                            <li>Product Launch - On track</li>
+                                            <li>Q3 Marketing Campaign - Planning</li>
+                                            <li>Mobile App Development - Behind schedule</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="data-card">
+                                        <h3>Upcoming Deadlines</h3>
+                                        <ul>
+                                            <li>Client Proposal - Tomorrow</li>
+                                            <li>Sprint Review - 2 days</li>
+                                            <li>Product Demo - Next week</li>
+                                            <li>Quarterly Report - 10 days</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <a href="#" class="btn btn-primary">Manage Projects</a>
+                            </div>
+                            
+                            <div class="tab-content" id="team">
                                 <h3>Team Performance</h3>
-                                <div class="stats">
-                                    <div class="stat">
-                                        <div class="stat-value">94%</div>
-                                        <div class="stat-label">Tasks Done</div>
+                                <p>Monitor your team's productivity and task completion rates.</p>
+                                
+                                <div class="data-grid">
+                                    <div class="data-card">
+                                        <h3>Top Performers</h3>
+                                        <ul>
+                                            <li>Sarah Johnson - 98% completion</li>
+                                            <li>Michael Chen - 96% completion</li>
+                                            <li>Jessica Williams - 94% completion</li>
+                                            <li>David Brown - 92% completion</li>
+                                        </ul>
                                     </div>
-                                    <div class="stat">
-                                        <div class="stat-value">87%</div>
-                                        <div class="stat-label">On Time</div>
-                                    </div>
-                                    <div class="stat">
-                                        <div class="stat-value">4.8/5</div>
-                                        <div class="stat-label">Satisfaction</div>
+                                    
+                                    <div class="data-card">
+                                        <h3>Team Capacity</h3>
+                                        <div class="stats">
+                                            <div class="stat">
+                                                <div class="stat-value">78%</div>
+                                                <div class="stat-label">Capacity Used</div>
+                                            </div>
+                                            <div class="stat">
+                                                <div class="stat-value">22%</div>
+                                                <div class="stat-label">Available</div>
+                                            </div>
+                                        </div>
+                                        <p>Recommended new project capacity: 15%</p>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        
-                        <a href="#" class="btn btn-primary">View Detailed Reports</a>
-                    </div>
-                    
-                    <div class="tab-content" id="projects">
-                        <h3>Project Management</h3>
-                        <p>Manage all your projects, assign tasks, and track progress.</p>
-                        
-                        <div class="data-grid">
-                            <div class="data-card">
-                                <h3>Recent Projects</h3>
-                                <ul>
-                                    <li>Website Redesign - 80% complete</li>
-                                    <li>Product Launch - On track</li>
-                                    <li>Q3 Marketing Campaign - Planning</li>
-                                    <li>Mobile App Development - Behind schedule</li>
-                                </ul>
+                                
+                                <a href="#" class="btn btn-primary">View Team Dashboard</a>
                             </div>
                             
-                            <div class="data-card">
-                                <h3>Upcoming Deadlines</h3>
-                                <ul>
-                                    <li>Client Proposal - Tomorrow</li>
-                                    <li>Sprint Review - 2 days</li>
-                                    <li>Product Demo - Next week</li>
-                                    <li>Quarterly Report - 10 days</li>
-                                </ul>
+                            <div class="tab-content" id="analytics">
+                                <h3>Advanced Analytics</h3>
+                                <p>Deep dive into your project metrics with our advanced analytics tools.</p>
+                                
+                                <div class="data-grid">
+                                    <div class="data-card">
+                                        <h3>Project Health</h3>
+                                        <div class="stats">
+                                            <div class="stat">
+                                                <div class="stat-value">82%</div>
+                                                <div class="stat-label">On Budget</div>
+                                            </div>
+                                            <div class="stat">
+                                                <div class="stat-value">76%</div>
+                                                <div class="stat-label">On Time</div>
+                                            </div>
+                                            <div class="stat">
+                                                <div class="stat-value">91%</div>
+                                                <div class="stat-label">Quality</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="data-card">
+                                        <h3>ROI Metrics</h3>
+                                        <div class="stats">
+                                            <div class="stat">
+                                                <div class="stat-value">3.2x</div>
+                                                <div class="stat-label">Average ROI</div>
+                                            </div>
+                                            <div class="stat">
+                                                <div class="stat-value">17%</div>
+                                                <div class="stat-label">Cost Savings</div>
+                                            </div>
+                                            <div class="stat">
+                                                <div class="stat-value">42%</div>
+                                                <div class="stat-label">Efficiency Gain</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <a href="#" class="btn btn-primary">Generate Custom Report</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials Section -->
+            <section class="testimonials" id="testimonials">
+                <div class="container">
+                    <h2 class="section-heading">What Our Clients Say</h2>
+                    <p class="section-subheading">Hear from businesses that have transformed their workflow with CloudFlow.</p>
+                    
+                    <div class="testimonial-grid">
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">"CloudFlow has revolutionized how our team manages projects. We've seen a 40% increase in productivity since implementation. The dashboard gives us real-time visibility into all our projects."</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">SJ</div>
+                                <div class="author-details">
+                                    <span class="author-name">Sarah Johnson</span>
+                                    <span class="author-role">CTO, TechInnovate Inc.</span>
+                                </div>
                             </div>
                         </div>
                         
-                        <a href="#" class="btn btn-primary">Manage Projects</a>
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">"The analytics features alone have paid for the platform. We're making data-driven decisions that have increased our ROI significantly. Our team collaboration has never been better."</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">MR</div>
+                                <div class="author-details">
+                                    <span class="author-name">Michael Rodriguez</span>
+                                    <span class="author-role">Project Director, Global Solutions</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">"Implementation was seamless and our team adopted it quickly. The automated workflows have saved us countless hours on manual processes. Customer support is exceptional."</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">AL</div>
+                                <div class="author-details">
+                                    <span class="author-name">Amanda Lewis</span>
+                                    <span class="author-role">Operations Manager, Enterprise Co</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">"We evaluated multiple platforms and CloudFlow stood out for its intuitive interface and powerful features. The mobile app keeps our remote team connected and productive from anywhere."</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">TW</div>
+                                <div class="author-details">
+                                    <span class="author-name">Thomas Wilson</span>
+                                    <span class="author-role">CEO, Startup Ventures</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pricing Section -->
+            <section class="pricing" id="pricing">
+                <div class="container">
+                    <h2 class="section-heading">Simple, Transparent Pricing</h2>
+                    <p class="section-subheading">Choose the plan that works best for your team with a free 14-day trial.</p>
+                    
+                    <div class="pricing-grid">
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h3 class="pricing-name">Starter</h3>
+                                <div class="pricing-price">$19<span>/user/month</span></div>
+                            </div>
+                            <ul class="pricing-features">
+                                <li>Up to 10 users</li>
+                                <li>Basic project management</li>
+                                <li>5GB storage</li>
+                                <li>Standard support</li>
+                                <li>Basic analytics</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline" id="starter-plan">Get Started</a>
+                        </div>
+                        
+                        <div class="pricing-card featured">
+                            <div class="pricing-header">
+                                <h3 class="pricing-name">Professional</h3>
+                                <div class="pricing-price">$39<span>/user/month</span></div>
+                            </div>
+                            <ul class="pricing-features">
+                                <li>Unlimited users</li>
+                                <li>Advanced project management</li>
+                                <li>50GB storage</li>
+                                <li>Priority support</li>
+                                <li>Advanced analytics</li>
+                                <li>Automated workflows</li>
+                                <li>Third-party integrations</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary" id="professional-plan">Get Started</a>
+                        </div>
+                        
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h3 class="pricing-name">Enterprise</h3>
+                                <div class="pricing-price">$69<span>/user/month</span></div>
+                            </div>
+                            <ul class="pricing-features">
+                                <li>Unlimited users</li>
+                                <li>Customizable solutions</li>
+                                <li>Unlimited storage</li>
+                                <li>24/7 dedicated support</li>
+                                <li>Custom analytics</li>
+                                <li>Advanced security</li>
+                                <li>API access</li>
+                                <li>Onboarding assistance</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline" id="enterprise-plan">Contact Sales</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final CTA Section -->
+            <section class="cta">
+                <div class="container">
+                    <h2 class="cta-heading">Ready to Transform Your Workflow?</h2>
+                    <p class="section-subheading">Join thousands of teams who use CloudFlow to deliver better projects faster.</p>
+                    
+                    <div class="cta-buttons">
+                        <a href="#" class="btn btn-primary" id="cta-signup">Start Your Free Trial</a>
+                        <a href="#" class="btn btn-outline">Schedule a Demo</a>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Other Page Sections -->
+        <section id="features-page" class="page-section">
+            <div class="container">
+                <h2 class="section-heading">Features</h2>
+                <p class="section-subheading">Explore all the powerful features that CloudFlow offers to streamline your project management.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h3 class="feature-title">Advanced Analytics</h3>
+                        <p class="feature-desc">Gain valuable insights with real-time data visualization and custom reports. Track project performance and team productivity with detailed metrics.</p>
                     </div>
                     
-                    <div class="tab-content" id="team">
-                        <h3>Team Performance</h3>
-                        <p>Monitor your team's productivity and task completion rates.</p>
-                        
-                        <div class="data-grid">
-                            <div class="data-card">
-                                <h3>Top Performers</h3>
-                                <ul>
-                                    <li>Sarah Johnson - 98% completion</li>
-                                    <li>Michael Chen - 96% completion</li>
-                                    <li>Jessica Williams - 94% completion</li>
-                                    <li>David Brown - 92% completion</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="data-card">
-                                <h3>Team Capacity</h3>
-                                <div class="stats">
-                                    <div class="stat">
-                                        <div class="stat-value">78%</div>
-                                        <div class="stat-label">Capacity Used</div>
-                                    </div>
-                                    <div class="stat">
-                                        <div class="stat-value">22%</div>
-                                        <div class="stat-label">Available</div>
-                                    </div>
-                                </div>
-                                <p>Recommended new project capacity: 15%</p>
-                            </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
                         </div>
-                        
-                        <a href="#" class="btn btn-primary">View Team Dashboard</a>
+                        <h3 class="feature-title">Team Collaboration</h3>
+                        <p class="feature-desc">Work together seamlessly with shared tasks, comments, and file sharing. Assign responsibilities and track progress in real-time.</p>
                     </div>
                     
-                    <div class="tab-content" id="analytics">
-                        <h3>Advanced Analytics</h3>
-                        <p>Deep dive into your project metrics with our advanced analytics tools.</p>
-                        
-                        <div class="data-grid">
-                            <div class="data-card">
-                                <h3>Project Health</h3>
-                                <div class="stats">
-                                    <div class="stat">
-                                        <div class="stat-value">82%</div>
-                                        <div class="stat-label">On Budget</div>
-                                    </div>
-                                    <div class="stat">
-                                        <div class="stat-value">76%</div>
-                                        <div class="stat-label">On Time</div>
-                                    </div>
-                                    <div class="stat">
-                                        <div class="stat-value">91%</div>
-                                        <div class="stat-label">Quality</div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="data-card">
-                                <h3>ROI Metrics</h3>
-                                <div class="stats">
-                                    <div class="stat">
-                                        <div class="stat-value">3.2x</div>
-                                        <div class="stat-label">Average ROI</div>
-                                    </div>
-                                    <div class="stat">
-                                        <div class="stat-value">17%</div>
-                                        <div class="stat-label">Cost Savings</div>
-                                    </div>
-                                    <div class="stat">
-                                        <div class="stat-value">42%</div>
-                                        <div class="stat-label">Efficiency Gain</div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-tasks"></i>
                         </div>
-                        
-                        <a href="#" class="btn btn-primary">Generate Custom Report</a>
+                        <h3 class="feature-title">Automated Workflows</h3>
+                        <p class="feature-desc">Automate repetitive tasks and create custom workflows without coding. Save time and reduce errors with our intuitive automation tools.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Enterprise Security</h3>
+                        <p class="feature-desc">Bank-level security keeps your data safe with encryption and regular backups. Role-based access control ensures data privacy.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-plug"></i>
+                        </div>
+                        <h3 class="feature-title">Third-Party Integrations</h3>
+                        <p class="feature-desc">Connect with your favorite tools like Slack, Google Drive, and Microsoft Teams. Our API allows for custom integrations with your existing systems.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Mobile Accessibility</h3>
+                        <p class="feature-desc">Manage projects on the go with our iOS and Android mobile apps. Receive notifications and update tasks from anywhere.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <h2 class="section-heading">What Our Clients Say</h2>
-            <p class="section-subheading">Hear from businesses that have transformed their workflow with CloudFlow.</p>
-            
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"CloudFlow has revolutionized how our team manages projects. We've seen a 40% increase in productivity since implementation. The dashboard gives us real-time visibility into all our projects."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SJ</div>
-                        <div class="author-details">
-                            <span class="author-name">Sarah Johnson</span>
-                            <span class="author-role">CTO, TechInnovate Inc.</span>
-                        </div>
-                    </div>
-                </div>
+        <section id="pricing-page" class="page-section">
+            <div class="container">
+                <h2 class="section-heading">Pricing Plans</h2>
+                <p class="section-subheading">Choose the plan that works best for your team with a free 14-day trial.</p>
                 
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"The analytics features alone have paid for the platform. We're making data-driven decisions that have increased our ROI significantly. Our team collaboration has never been better."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">MR</div>
-                        <div class="author-details">
-                            <span class="author-name">Michael Rodriguez</span>
-                            <span class="author-role">Project Director, Global Solutions</span>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-name">Starter</h3>
+                            <div class="pricing-price">$19<span>/user/month</span></div>
                         </div>
+                        <ul class="pricing-features">
+                            <li>Up to 10 users</li>
+                            <li>Basic project management</li>
+                            <li>5GB storage</li>
+                            <li>Standard support</li>
+                            <li>Basic analytics</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline" id="starter-plan-2">Get Started</a>
                     </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"Implementation was seamless and our team adopted it quickly. The automated workflows have saved us countless hours on manual processes. Customer support is exceptional."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">AL</div>
-                        <div class="author-details">
-                            <span class="author-name">Amanda Lewis</span>
-                            <span class="author-role">Operations Manager, Enterprise Co</span>
+                    
+                    <div class="pricing-card featured">
+                        <div class="pricing-header">
+                            <h3 class="pricing-name">Professional</h3>
+                            <div class="pricing-price">$39<span>/user/month</span></div>
                         </div>
+                        <ul class="pricing-features">
+                            <li>Unlimited users</li>
+                            <li>Advanced project management</li>
+                            <li>50GB storage</li>
+                            <li>Priority support</li>
+                            <li>Advanced analytics</li>
+                            <li>Automated workflows</li>
+                            <li>Third-party integrations</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary" id="professional-plan-2">Get Started</a>
                     </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"We evaluated multiple platforms and CloudFlow stood out for its intuitive interface and powerful features. The mobile app keeps our remote team connected and productive from anywhere."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">TW</div>
-                        <div class="author-details">
-                            <span class="author-name">Thomas Wilson</span>
-                            <span class="author-role">CEO, Startup Ventures</span>
+                    
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-name">Enterprise</h3>
+                            <div class="pricing-price">$69<span>/user/month</span></div>
                         </div>
+                        <ul class="pricing-features">
+                            <li>Unlimited users</li>
+                            <li>Customizable solutions</li>
+                            <li>Unlimited storage</li>
+                            <li>24/7 dedicated support</li>
+                            <li>Custom analytics</li>
+                            <li>Advanced security</li>
+                            <li>API access</li>
+                            <li>Onboarding assistance</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline" id="enterprise-plan-2">Contact Sales</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Pricing Section -->
-    <section class="pricing" id="pricing">
-        <div class="container">
-            <h2 class="section-heading">Simple, Transparent Pricing</h2>
-            <p class="section-subheading">Choose the plan that works best for your team with a free 14-day trial.</p>
-            
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3 class="pricing-name">Starter</h3>
-                        <div class="pricing-price">$19<span>/user/month</span></div>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>Up to 10 users</li>
-                        <li>Basic project management</li>
-                        <li>5GB storage</li>
-                        <li>Standard support</li>
-                        <li>Basic analytics</li>
-                    </ul>
-                    <a href="#" class="btn btn-outline">Get Started</a>
-                </div>
+        <section id="integrations-page" class="page-section">
+            <div class="container">
+                <h2 class="section-heading">Integrations</h2>
+                <p class="section-subheading">Connect CloudFlow with your favorite tools to create a seamless workflow.</p>
                 
-                <div class="pricing-card featured">
-                    <div class="pricing-header">
-                        <h3 class="pricing-name">Professional</h3>
-                        <div class="pricing-price">$39<span>/user/month</span></div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fab fa-slack"></i>
+                        </div>
+                        <h3 class="feature-title">Slack</h3>
+                        <p class="feature-desc">Receive notifications and updates directly in your Slack channels. Create tasks from Slack messages.</p>
                     </div>
-                    <ul class="pricing-features">
-                        <li>Unlimited users</li>
-                        <li>Advanced project management</li>
-                        <li>50GB storage</li>
-                        <li>Priority support</li>
-                        <li>Advanced analytics</li>
-                        <li>Automated workflows</li>
-                        <li>Third-party integrations</li>
-                    </ul>
-                    <a href="#" class="btn btn-primary">Get Started</a>
-                </div>
-                
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3 class="pricing-name">Enterprise</h3>
-                        <div class="pricing-price">$69<span>/user/month</span></div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fab fa-google-drive"></i>
+                        </div>
+                        <h3 class="feature-title">Google Drive</h3>
+                        <p class="feature-desc">Attach files directly from Google Drive to your tasks and projects. Real-time collaboration on documents.</p>
                     </div>
-                    <ul class="pricing-features">
-                        <li>Unlimited users</li>
-                        <li>Customizable solutions</li>
-                        <li>Unlimited storage</li>
-                        <li>24/7 dedicated support</li>
-                        <li>Custom analytics</li>
-                        <li>Advanced security</li>
-                        <li>API access</li>
-                        <li>Onboarding assistance</li>
-                    </ul>
-                    <a href="#" class="btn btn-outline">Contact Sales</a>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fab fa-microsoft"></i>
+                        </div>
+                        <h3 class="feature-title">Microsoft Teams</h3>
+                        <p class="feature-desc">Integrate with Microsoft Teams for seamless communication and project updates.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Calendar Apps</h3>
+                        <p class="feature-desc">Sync deadlines and milestones with Google Calendar, Outlook, and other calendar applications.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fab fa-jira"></i>
+                        </div>
+                        <h3 class="feature-title">Jira</h3>
+                        <p class="feature-desc">Connect with Jira for comprehensive project management across platforms.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="feature-title">API Access</h3>
+                        <p class="feature-desc">Build custom integrations with our comprehensive REST API and webhooks.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Final CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <h2 class="cta-heading">Ready to Transform Your Workflow?</h2>
-            <p class="section-subheading">Join thousands of teams who use CloudFlow to deliver better projects faster.</p>
-            
-            <div class="cta-buttons">
-                <a href="#" class="btn btn-primary">Start Your Free Trial</a>
-                <a href="#" class="btn btn-outline">Schedule a Demo</a>
+        <section id="updates-page" class="page-section">
+            <div class="container">
+                <h2 class="section-heading">Latest Updates</h2>
+                <p class="section-subheading">Stay informed about the newest features and improvements to CloudFlow.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3 class="feature-title">Performance Boost</h3>
+                        <p class="feature-desc">We've improved loading times by 40% across the platform. Enjoy a smoother experience with our latest optimizations.</p>
+                        <p class="feature-desc"><small>Released: October 15, 2023</small></p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Mobile App Update</h3>
+                        <p class="feature-desc">Our mobile app now includes offline capabilities and improved notification settings.</p>
+                        <p class="feature-desc"><small>Released: October 5, 2023</small></p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">New Analytics</h3>
+                        <p class="feature-desc">Added burn-down charts and resource allocation reports to help you better track project health.</p>
+                        <p class="feature-desc"><small>Released: September 28, 2023</small></p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3 class="feature-title">Automation Enhancements</h3>
+                        <p class="feature-desc">New triggers and actions added to our workflow automation system for more customized processes.</p>
+                        <p class="feature-desc"><small>Released: September 15, 2023</small></p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Security Upgrade</h3>
+                        <p class="feature-desc">Enhanced security protocols with two-factor authentication and improved encryption methods.</p>
+                        <p class="feature-desc"><small>Released: September 5, 2023</small></p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-plug"></i>
+                        </div>
+                        <h3 class="feature-title">New Integrations</h3>
+                        <p class="feature-desc">Added support for Asana, Trello, and Monday.com to make transitioning to CloudFlow even easier.</p>
+                        <p class="feature-desc"><small>Released: August 25, 2023</small></p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer>
@@ -1032,30 +1383,30 @@
                 <div class="footer-column">
                     <h3>Product</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Features</a></li>
-                        <li><a href="#">Pricing</a></li>
-                        <li><a href="#">Integrations</a></li>
-                        <li><a href="#">Updates</a></li>
+                        <li><a href="#" id="footer-features">Features</a></li>
+                        <li><a href="#" id="footer-pricing">Pricing</a></li>
+                        <li><a href="#" id="footer-integrations">Integrations</a></li>
+                        <li><a href="#" id="footer-updates">Updates</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Resources</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">Tutorials</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Support</a></li>
+                        <li><a href="#" id="footer-documentation">Documentation</a></li>
+                        <li><a href="#" id="footer-tutorials">Tutorials</a></li>
+                        <li><a href="#" id="footer-blog">Blog</a></li>
+                        <li><a href="#" id="footer-support">Support</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Company</h3>
                     <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Legal</a></li>
+                        <li><a href="#" id="footer-about">About Us</a></li>
+                        <li><a href="#" id="footer-careers">Careers</a></li>
+                        <li><a href="#" id="footer-contact">Contact</a></li>
+                        <li><a href="#" id="footer-legal">Legal</a></li>
                     </ul>
                 </div>
             </div>
@@ -1066,7 +1417,324 @@
         </div>
     </footer>
 
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Log In</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password" required>
+                </div>
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember-me">
+                        <label for="remember-me">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Log In</button>
+            </form>
+            <div class="modal-footer">
+                <p>Don't have an account? <a href="#" id="signup-from-login">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signup-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Sign Up</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" placeholder="Your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email Address</label>
+                    <input type="email" id="signup-email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-company">Company Name</label>
+                    <input type="text" id="signup-company" placeholder="Your company name">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+            </form>
+            <div class="modal-footer">
+                <p>Already have an account? <a href="#" id="login-from-signup">Log in</a></p>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // DOM Elements
+        const loginBtn = document.getElementById('login-btn');
+        const signupBtn = document.getElementById('signup-btn');
+        const heroSignup = document.getElementById('hero-signup');
+        const ctaSignup = document.getElementById('cta-signup');
+        const loginModal = document.getElementById('login-modal');
+        const signupModal = document.getElementById('signup-modal');
+        const closeModalButtons = document.querySelectorAll('.close-modal');
+        const signupFromLogin = document.getElementById('signup-from-login');
+        const loginFromSignup = document.getElementById('login-from-signup');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        
+        // Page Navigation Elements
+        const homeLink = document.getElementById('home-link');
+        const featuresLink = document.getElementById('features-link');
+        const pricingLink = document.getElementById('pricing-link');
+        const integrationsLink = document.getElementById('integrations-link');
+        const updatesLink = document.getElementById('updates-link');
+        
+        // Footer Navigation Elements
+        const footerFeatures = document.getElementById('footer-features');
+        const footerPricing = document.getElementById('footer-pricing');
+        const footerIntegrations = document.getElementById('footer-integrations');
+        const footerUpdates = document.getElementById('footer-updates');
+        const footerDocumentation = document.getElementById('footer-documentation');
+        const footerTutorials = document.getElementById('footer-tutorials');
+        const footerBlog = document.getElementById('footer-blog');
+        const footerSupport = document.getElementById('footer-support');
+        const footerAbout = document.getElementById('footer-about');
+        const footerCareers = document.getElementById('footer-careers');
+        const footerContact = document.getElementById('footer-contact');
+        const footerLegal = document.getElementById('footer-legal');
+        
+        // Page Sections
+        const homePage = document.getElementById('home-page');
+        const featuresPage = document.getElementById('features-page');
+        const pricingPage = document.getElementById('pricing-page');
+        const integrationsPage = document.getElementById('integrations-page');
+        const updatesPage = document.getElementById('updates-page');
+        const pageSections = document.querySelectorAll('.page-section');
+        
+        // Pricing Plan Buttons
+        const starterPlan = document.getElementById('starter-plan');
+        const professionalPlan = document.getElementById('professional-plan');
+        const enterprisePlan = document.getElementById('enterprise-plan');
+        const starterPlan2 = document.getElementById('starter-plan-2');
+        const professionalPlan2 = document.getElementById('professional-plan-2');
+        const enterprisePlan2 = document.getElementById('enterprise-plan-2');
+
+        // Show Modal Functions
+        function showLoginModal() {
+            loginModal.style.display = 'flex';
+            signupModal.style.display = 'none';
+        }
+
+        function showSignupModal() {
+            signupModal.style.display = 'flex';
+            loginModal.style.display = 'none';
+        }
+
+        // Close Modal Function
+        function closeModals() {
+            loginModal.style.display = 'none';
+            signupModal.style.display = 'none';
+        }
+
+        // Show Page Function
+        function showPage(pageId) {
+            pageSections.forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Event Listeners for Modals
+        loginBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showLoginModal();
+        });
+
+        signupBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showSignupModal();
+        });
+
+        heroSignup.addEventListener('click', function(e) {
+            e.preventDefault();
+            showSignupModal();
+        });
+
+        ctaSignup.addEventListener('click', function(e) {
+            e.preventDefault();
+            showSignupModal();
+        });
+
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', closeModals);
+        });
+
+        signupFromLogin.addEventListener('click', function(e) {
+            e.preventDefault();
+            showSignupModal();
+        });
+
+        loginFromSignup.addEventListener('click', function(e) {
+            e.preventDefault();
+            showLoginModal();
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target === loginModal) {
+                closeModals();
+            }
+            if (e.target === signupModal) {
+                closeModals();
+            }
+        });
+
+        // Form Submissions
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Login functionality would be implemented here with backend integration.');
+            closeModals();
+        });
+
+        signupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Signup functionality would be implemented here with backend integration.');
+            closeModals();
+        });
+
+        // Navigation Event Listeners
+        homeLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage('home-page');
+        });
+
+        featuresLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage('features-page');
+        });
+
+        pricingLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage('pricing-page');
+        });
+
+        integrationsLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage('integrations-page');
+        });
+
+        updatesLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage('updates-page');
+        });
+
+        // Footer Navigation Event Listeners
+        footerFeatures.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage('features-page');
+        });
+
+        footerPricing.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage('pricing-page');
+        });
+
+        footerIntegrations.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage('integrations-page');
+        });
+
+        footerUpdates.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage('updates-page');
+        });
+
+        // Resource Links
+        footerDocumentation.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Documentation page would open here.');
+        });
+
+        footerTutorials.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Tutorials page would open here.');
+        });
+
+        footerBlog.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Blog page would open here.');
+        });
+
+        footerSupport.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Support page would open here.');
+        });
+
+        // Company Links
+        footerAbout.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('About Us page would open here.');
+        });
+
+        footerCareers.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Careers page would open here.');
+        });
+
+        footerContact.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Contact page would open here.');
+        });
+
+        footerLegal.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Legal page would open here.');
+        });
+
+        // Pricing Plan Buttons
+        starterPlan.addEventListener('click', function(e) {
+            e.preventDefault();
+            showSignupModal();
+        });
+
+        professionalPlan.addEventListener('click', function(e) {
+            e.preventDefault();
+            showSignupModal();
+        });
+
+        enterprisePlan.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Enterprise plan contact form would open here.');
+        });
+
+        starterPlan2.addEventListener('click', function(e) {
+            e.preventDefault();
+            showSignupModal();
+        });
+
+        professionalPlan2.addEventListener('click', function(e) {
+            e.preventDefault();
+            showSignupModal();
+        });
+
+        enterprisePlan2.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Enterprise plan contact form would open here.');
+        });
+
         // Tab functionality for dashboard
         document.addEventListener('DOMContentLoaded', function() {
             const tabs = document.querySelectorAll('.dashboard-tab');
@@ -1083,24 +1751,6 @@
                     // Add active class to clicked tab and corresponding content
                     tab.classList.add('active');
                     document.getElementById(targetTab).classList.add('active');
-                });
-            });
-            
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
                 });
             });
             
